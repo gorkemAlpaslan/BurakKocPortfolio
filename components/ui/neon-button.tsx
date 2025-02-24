@@ -1,15 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-interface NeonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary"
+interface NeonButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary";
 }
 
-export function NeonButton({ className, variant = "primary", children, ...props }: NeonButtonProps) {
+export function NeonButton({
+  className,
+  variant = "primary",
+  children,
+  ...props
+}: NeonButtonProps) {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -18,12 +24,11 @@ export function NeonButton({ className, variant = "primary", children, ...props 
         variant === "primary"
           ? "bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90"
           : "bg-transparent text-black dark:text-white border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5",
-        className,
+        className
       )}
       {...props}
     >
       <span className="relative z-10">{children}</span>
     </motion.button>
-  )
+  );
 }
-

@@ -1,23 +1,32 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-interface NeonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary"
-}
+type NeonButtonProps = {
+  variant?: "primary" | "secondary";
+  className?: string; // className hatasını önlemek için eklendi
+  children: React.ReactNode; // children hatasını önlemek için eklendi
+};
 
-export default function NeonButton({ className, variant = "primary", children, ...props }: NeonButtonProps) {
+export default function NeonButton({
+  className,
+  variant = "primary",
+  children,
+  ...props
+}: NeonButtonProps): React.JSX.Element {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
       className={cn(
         "relative px-6 py-2 rounded-full text-sm font-medium",
         "overflow-hidden",
-        variant === "primary" ? "bg-white text-black" : "bg-transparent text-white border border-white/20",
-        className,
+        variant === "primary"
+          ? "bg-white text-black"
+          : "bg-transparent text-white border border-white/20",
+        className
       )}
       {...props}
     >
@@ -42,6 +51,5 @@ export default function NeonButton({ className, variant = "primary", children, .
       {/* İçerik */}
       <span className="relative z-10">{children}</span>
     </motion.button>
-  )
+  );
 }
-

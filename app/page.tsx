@@ -72,9 +72,9 @@ function ElegantShape({
             "absolute inset-0 rounded-full",
             "bg-gradient-to-r to-transparent",
             gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.15] dark:border-black/[0.15]",
-            "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-            "after:absolute after:inset-0 after:rounded-full",
+            "backdrop-blur-[2px]",
+            "shadow-[0px_32px_0_rgba(255,255,255,1)] dark:shadow-[0px_32px_0_rgba(0,0,0,1)]",
+            "after:absolute",
             "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
           )}
         />
@@ -86,13 +86,13 @@ function ElegantShape({
 export default function Home() {
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentProjectIndex((prev) => (prev + 1) % 4); // 4 projemiz var
-  //   }, 5000); // Her 5 saniyede bir proje değişimi
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentProjectIndex((prev) => (prev + 1) % 4); // 4 projemiz var
+    }, 2000); // Her 5 saniyede bir proje değişimi
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full flex flex-col overflow-hidden bg-white dark:bg-[#030303]">
@@ -106,7 +106,7 @@ export default function Home() {
             width={400}
             height={100}
             rotate={12}
-            gradient="from-indigo-500/[0.08]"
+            gradient="from-indigo-500/[0.5]"
             className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
           />
           <ElegantShape
@@ -114,7 +114,7 @@ export default function Home() {
             width={300}
             height={80}
             rotate={-15}
-            gradient="from-rose-500/[0.08]"
+            gradient="from-transparent to-rose-500/[0.4]"
             className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
           />
           <ElegantShape
@@ -122,7 +122,7 @@ export default function Home() {
             width={200}
             height={60}
             rotate={-8}
-            gradient="from-violet-500/[0.08]"
+            gradient="from-violet-500/[0.3]"
             className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
           />
           <ElegantShape
@@ -130,7 +130,7 @@ export default function Home() {
             width={150}
             height={40}
             rotate={20}
-            gradient="from-amber-500/[0.08]"
+            gradient="from-transparent to-amber-500/[0.2]"
             className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
           />
           <ElegantShape
@@ -138,7 +138,7 @@ export default function Home() {
             width={100}
             height={30}
             rotate={-25}
-            gradient="from-cyan-500/[0.08]"
+            gradient="from-cyan-500/[0.5]"
             className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
           />
           {/* Yeni şekiller */}
@@ -147,15 +147,15 @@ export default function Home() {
             width={250}
             height={70}
             rotate={15}
-            gradient="from-blue-500/[0.08]"
-            className="left-[40%] top-[30%]"
+            gradient="from-transparent to-blue-500/[0.3]"
+            className="right-[25%] top-[40%]"
           />
           <ElegantShape
             delay={0.55}
             width={180}
             height={50}
             rotate={-20}
-            gradient="from-purple-500/[0.08]"
+            gradient="from-transparent to-purple-500/[0.5]"
             className="right-[30%] bottom-[20%]"
           />
           <ElegantShape
@@ -163,7 +163,7 @@ export default function Home() {
             width={120}
             height={35}
             rotate={30}
-            gradient="from-teal-500/[0.08]"
+            gradient="from-teal-500/[0.2]"
             className="left-[35%] bottom-[35%]"
           />
         </div>
@@ -171,7 +171,7 @@ export default function Home() {
         {/* Ana içerik konteyneri */}
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center relative">
           {/* Cihaz animasyon alanı - z-index: 10 */}
-          <div className="relative w-full h-[50vh] mb-8">
+          <div className="relative w-full h-[35vh] mb-8">
             <div className="absolute inset-0">
               <DevicePreview
                 currentProjectIndex={currentProjectIndex}
@@ -192,24 +192,39 @@ export default function Home() {
                 Selam Ben
               </span>
               <br />
-              <span
+              <motion.span
+                initial={{ backgroundPosition: "0% 50%" }}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 3, // 3 saniyede bir renk değişimi
+                  repeat: Infinity, // Sonsuz loop
+                  ease: "easeInOut",
+                }}
                 className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-blue-400  to-purple-400", // via-white dark:via-red-600
+                  "bg-clip-text text-transparent",
+                  "bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400",
+                  "animate-gradient",
                   pacifico.className
                 )}
+                style={{
+                  backgroundSize: "200% 100%", // Gradient’in hareket etmesi için gerekli
+                  display: "inline-block", // Animasyonun düzgün çalışmasını sağlar
+                }}
               >
                 Burak
-              </span>
+              </motion.span>
             </motion.h1>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-black/60 dark:text-white/60 mb-8"
+              className="text-lg text-black/80 dark:text-white/80 mb-8"
             >
               Grafik - UI/UX Tasarımcıyım
             </motion.p>
-
             {/* Butonlar */}
             <div className="flex items-center justify-center gap-4">
               <Link href="/portfolyo">
