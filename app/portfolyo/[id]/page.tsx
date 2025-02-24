@@ -67,7 +67,8 @@ Kullanıcı araştırmaları ve analitik verilere dayanarak, satın alma süreci
     description:
       "Kullanıcı deneyimini ve dönüşüm oranlarını artırmaya odaklanan bir e-ticaret platformunun yeniden tasarımı.",
     fullDescription: `Bu projede, müşterinin mevcut e-ticaret platformunu analiz ederek kullanıcı deneyimini iyileştirmeyi ve dönüşüm oranlarını artırmayı hedefledik.
-
+ 
+    
 Kullanıcı araştırmaları ve analitik verilere dayanarak, satın alma sürecindeki temel sorunları tespit ettik ve yeni bir tasarım yaklaşımı geliştirdik.`,
     imageUrl: "/placeholder.svg?height=300&width=400",
     category: "UI/UX Design",
